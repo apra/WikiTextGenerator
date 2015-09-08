@@ -33,62 +33,64 @@ SOFTWARE.
 */
 
 //// Writing style
-//   	ClassName
-//   	varName
-// 		function_name
+//      ClassName
+//      varName
+//      function_name
 
 
 	
-var WGen = (function(global){
-		
-	var sourceText, output, words, chars, maxtype = 'chars', maximum = 1000, current;
+var WGen = (function (global) {
+    
+    "use strict";
+    
+    var sourceText, output, words, chars, maxtype = 'chars', maximum = 1000, current;
 	
 	//initialize variables
-	function init(max, typ){
+	function init(max, typ) {
 		sourceText = output = "";
 		current = 0;
-		maxtype = typ;
-		maximum = max;
-		chars = 1000;
+        maxtype = typ;
+        chars = 1000;
+        maximum = max;
 	}
 	//Collect data from Wikipedia and 
-	function gather_page(callback){
+	function gather_page(callback) {
 		
-		var rndnum=Math.floor(Math.random()*999999).toString();
+		var rndnum = Math.floor(Math.random() * 999999).toString();
 		
-		MediaWikiJS('https://en.wikipedia.org', 
+		MediaWikiJS('https://en.wikipedia.org',
 			{
-				action: 'query', 
-				generator: 'random', 
-				prop: 'extracts', 
-				grnnamespace : '0', 
-				exchars: '' + chars, 
-				format: 'json', 
-				requestid: rndnum 
+				action: 'query',
+				generator: 'random',
+				prop: 'extracts',
+				grnnamespace : '0',
+				exchars: '' + chars,
+				format: 'json',
+				requestid: rndnum
 			},
 			function (data) {
-   				output = parse_results(data, callback);
-				if(typeof(callback) === "function")
-					callback({output:output,progress:Math.floor(current/maximum*100)/100});
-			}
-		);
+                output = parse_results(data, callback);
+                if (typeof (callback) === "function") {
+					callback({output: output, progress: Math.floor(current / maximum * 100) / 100});
+                }
+			});
 	}
-	function parse_results(obj, callback){
+	function parse_results(obj, callback) {
 		//Temp storage of text
 		var text = "";
 		//To get to the text without knowing the id of the page
-		for(var a in obj.query.pages){
-			//Get text and remove HTML tags, links and "..."
+		for (var a in obj.query.pages){
+            //Get text and remove HTML tags, links and "..."
 			text = obj.query.pages[a].extract.replace(/<\w+(\s+("[^"]*"|'[^']*'|[^>])+)?>|<\/\w+>/gi, " ").replace(/\.\.\./gi,'').replace('|https?://www\.[a-z\.0-9]+|i', '');
 		}
 		//Add the text gathered to the other already existent
-		sourceText+= text;
+		sourceText+= text.replace(/  +/g, ' ');
 			
-		if(maxtype == 'words'){
+		if (maxtype == 'words'){
 			words = sourceText.split(' ').slice(0,maximum);
 			words = shuffle(words);
 			current = words.length;
-		}else if(maxtype == 'chars'){
+		}else if (maxtype == 'chars'){
 			words = sourceText.substring(0,maximum).split(' ');
 			words = shuffle(words);
 			current = sourceText.length
