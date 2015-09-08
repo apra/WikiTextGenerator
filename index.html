@@ -1,0 +1,137 @@
+<html>
+<head>
+	<title>WikiText Generator</title>
+	<meta name="viewport" content="width=device-width">
+	<link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src='js/nprogress.js'></script>
+	<script src='js/wgen.js'></script>
+    <script src='js/MediaWikiJS.js'></script>
+    <script src='js/ZeroClipboard.min.js'></script>
+	<link rel='stylesheet' href='css/nprogress.css'/>
+	<link rel='stylesheet' href='css/style.css'/>
+	<link rel='shortcut icon' href='images/favicon.ico' type='image/x-icon'/>
+</head>
+<body>
+	<header>
+		<h1>WTG</h1><span id="cursor"></span>
+	</header>
+	<section>
+	<div id="inputs">
+		<input type="number" id="maxchar" value="2000" autofocus/>
+		<ul id="type">
+			<li title="chars">chars</li>
+		</ul>
+	</div>
+    <div id="copy">Copy to Clipboard</div>
+	<div id="output" contenteditable="true"></div>
+	</section>
+	<footer>
+		<div id="filler">
+		<div class="left"><a href="about.html">About</a><p>All words are from Wikipedia</p></div>
+		<div class="right">
+			<a href="https://twitter.com/share" class="twitter-share-button" data-text="I just generated a bunch of random words using text from Wikipedia with" data-via="codefeeling" data-count="none">Tweet</a>
+			<a href="#"><img src="images/GitHub-Mark-32px.png" id="github"></a>
+		</div>
+		</div>
+	</footer>
+	<script>
+	!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+	function on_wikipedia(data){
+		$("#output").html(data.output);
+		NProgress.set(data.progress);
+		if(data.progress==1){
+			NProgress.done();
+		}
+        $('#copy').text('Copy to Clipboard').removeClass('hvr-underline-from-center')
+        $('#copy').attr('data-clipboard-text', data.output);
+		selected=false
+	}
+    var firstoutfocus=true;
+	var selected= false,seltext='';
+	var el = document.getElementById("output");
+    var clipboardButton = new ZeroClipboard( document.getElementById("copy") );
+        clipboardButton.on( "ready", function( readyEvent ) {
+          clipboardButton.on( "aftercopy", function( event ) {
+            $('#copy').text('Copied').addClass('hvr-underline-from-center')
+          } );
+        } );
+	$(function(){
+		$('#type li').on('click',function(){
+			if($(this).prop('title')=='chars'){
+				$(this).prop('title','words').text('words')
+			}else{
+				$(this).prop('title','chars').text('chars')
+			}
+			start()
+		});
+		var maxchars=$('#maxchar').val();
+		WGen.init(parseInt(maxchars), 'chars')
+		WGen.gatherpage(function(data){on_wikipedia(data)});
+		setInterval(function(){blink()},500);
+	});
+	$('#maxchar').on('change focusout keypress',function(e){
+        if(firstoutfocus==true&&e.type!="keypress"){
+            firstoutfocus=false;
+            return true;
+        }
+		if(e.type=="keypress"){
+			if(e.which==13){
+				start()
+			}
+		}else{
+        	start()
+		}
+        
+	});
+	$('#output').on('mouseup',function(){
+		
+		if (window.getSelection) {
+        	seltext = window.getSelection().toString();
+    	} else if (document.selection && document.selection.type != "Control") {
+       		seltext = document.selection.createRange().text;
+    	}
+		if(seltext==''){
+			selectElementContents(el);
+		selected=true;
+		}
+		if(!selected){
+			selectElementContents(el);
+			selected=true;
+		}else{
+			selected=false;
+		}
+		console.log(selected)
+	})
+	el.addEventListener('selectstart',function(){
+		
+		if(!selected){
+			selected=true
+		}
+		console.log(selected)
+	})
+	function start(){
+		var maxchars=($('#maxchar').val()<1000000)?$('#maxchar').val():999999;
+        console.log(maxchars)
+		var typ=$('#type li').prop('title');
+		NProgress.start();
+		WGen.init(parseInt(maxchars), typ)
+		WGen.gatherpage(function(data){on_wikipedia(data)});
+	}
+	function blink(){			
+		if($('#cursor').css('background-color')=='rgb(255, 255, 255)'){
+			$('#cursor').css({'background-color':'transparent'})
+		}else{
+			$('#cursor').css({'background-color':'white'})
+		}
+	}
+	function selectElementContents(el) {
+    	var range = document.createRange();
+    	range.selectNodeContents(el);
+    	var sel = window.getSelection();
+    	sel.removeAllRanges();
+    	sel.addRange(range);
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+::selection{
+	background-color: #090909;
+	color: white
+}
+body{
+	background-color: #f2f2f2;
+}
+h1,h2,h3,h4,section{
+    font-family: Droid Serif;
+}
+a{
+    color: #2e2e2e;
+}
+a:visited{
+    color: #2e2e2e
+}
+p{
+    line-height: 22.33px;
+	font-size: 15px
+}
+section {
+	max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 40px;
+}
+#copy {
+    margin: 0 auto;
+    text-align: center;
+    padding: 15px 0;
+    cursor: pointer;
+    background-color: #2e2e2e;
+    color: white;
+}
+#output {
+	line-height: 22.33px;
+	font-size: 15px;
+	color: rgba(0, 0, 0, 0.8);
+	background-color: #e6e6e6;
+	padding: 34px 55px;
+}
+#output:focus{
+	outline:none
+}
+header {
+    margin: 30px auto 0;
+    width: 73px;
+    cursor: pointer
+}
+#cursor {
+    width: 12px;
+    height: 24px;
+    background-color: white;
+    display: inline-block;
+    margin: 0px 0 0 0;
+    transform: translate3d(10px,3px,0);
+}
+
+header h1 {
+    font-size: 1.5em;
+    font-family: Droid Serif;
+    font-weight: normal;
+    display: inline-block;
+    width: 50px;
+    margin: 0px 0 0px 0px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+}
+
+input#maxchar {
+    width: 50%;
+    height: 180px;
+    border: 0;
+    background-color: #d3d3d3;
+    color: white;
+     font-family: Droid Serif;   
+    text-align: center;
+    font-size: 4em;
+	padding: 0;
+    display: inline-block;
+}
+input#maxchar:focus {
+    background-color: #2e2e2e;
+	outline: none;
+}
+ul#type {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    width: 50%;
+    float: right;
+    height: 180px;
+    background-color: #d3d3d3;
+	font-size: 4em;
+}
+ul#type:hover{
+	background-color: #2e2e2e;
+}
+#type li {
+	cursor: pointer;
+    color: white;
+    text-align: center;
+    line-height: 180px;
+}
+
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+footer {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    font-family: Droid Serif;
+    font-size: 0.75em;
+}
+footer a {
+    display: initial;
+    padding: 0 10px;
+	color: #2e2e2e
+}
+footer #github{
+    width: 20px;
+}
+footer p {
+    display: inline;
+}
+footer .right {
+    padding: 4px 25px 0 0;
+	margin-top: -6px;
+}
+#reddit{
+	text-decoration: none
+}
+#filler {
+    float: left;
+    width: 100%;
+    padding: 0 0 30px 10px;
+}
+footer p{
+    font-size: 1em;
+}
+@media all and (max-width: 600px) {
+	input#maxchar,ul#type {
+		font-size:2em;
+		height:90px
+	}
+	ul#type li{
+		line-height: 90px
+	}
+	#output {
+		padding:13px 21px
+	}
+}
+/*!
+ * Hover.css (http://ianlunn.github.io/Hover/)
+ * Version: 2.0.2
+ * Author: Ian Lunn @IanLunn
+ * Author URL: http://ianlunn.co.uk/
+ * Github: https://github.com/IanLunn/Hover
+ * Made available under a MIT License:
+ * http://www.opensource.org/licenses/mit-license.php
+ * Hover.css Copyright Ian Lunn 2014. Generated with Sass.
+ */
+/* Underline From Center */
+.hvr-underline-from-center {
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow: hidden;
+}
+.hvr-underline-from-center:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #2098d1;
+  height: 4px;
+  -webkit-transition-property: left, right;
+  transition-property: left, right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-underline-from-center:hover:before, .hvr-underline-from-center:focus:before, .hvr-underline-from-center:active:before {
+  left: 0;
+  right: 0;
+}

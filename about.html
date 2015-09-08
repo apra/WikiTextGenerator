@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<title>About - WikiText Generator</title>
+		<link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<link rel='stylesheet' href='css/style.css'/>
+	</head>
+	<body>
+		<header>
+			<header onclick="window.location.href='http://127.0.0.1/test/rndtext.html'">
+				<h1>WTG</h1><span id="cursor"></span>
+			</header>
+		</header>
+		<section>
+			<h2>How it happened</h2>
+			<p>
+				WikiText Generator is the result of an experiment. Create a sample-text generator using something different from the well known "Lorem Ipsum".
+				Since the only purpose of the text is filling up empty space, I though about doing something more random.
+				I simply used MediaWiki's APIs to fetch random excerpts from Wikipedia articles and then I randomized all the words. 
+			</p>
+			<h3>3rd-party script used</h3>
+			<h4>Fisher-Yates Shuffle</h4>
+			<p>
+				To randomize words I decided to use the Fisher-Yates algorithm, as explained 
+				<a href="http://bost.ocks.org/mike/shuffle/" target="_blank" title="Yates-Fisher Shuffle">here</a> wordefully by Mike Bostock.
+			</p>
+			<h4> Media-Wiki APIs </h4>
+			<p> In order to access the APIs I used brettz9's <a target="_blank" href="https://github.com/brettz9/mediawiki-js">mediawiki-js</a>. It is very lightweight and easy to use.
+			It let you fire a callback after the server sends the JSONP reply (<a target="_blank" href="http://stackoverflow.com/questions/2067472/what-is-jsonp-all-about">a clear explanation of JSONP</a> by jvenema).
+			<h2>Who am I</h2>
+            <p> I am Samuele Papa, known as apra on the internet. I do some stuff on <a target="_blank" href="https://github.com/apra" title="GitHub">GitHub</a> and I tweet <a target="_blank" href="https://twitter.com/oneapra" title="@oneapra">@oneapra</a>. Feel free to PM me if you have any suggestion or requests. </p>
+		</section>
+	<script>
+		function open(l){
+			window.open(l,'_blank')
+		}
+	$(function(){
+		setInterval(function(){blink()},500);
+	});
+	function blink(){			
+		if($('#cursor').css('background-color')=='rgb(255, 255, 255)'){
+			$('#cursor').css({'background-color':'transparent'})
+		}else{
+			$('#cursor').css({'background-color':'white'})
+		}
+	}
+	</script>
+	</body>
+</html>
