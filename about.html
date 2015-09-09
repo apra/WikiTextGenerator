@@ -4,6 +4,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<link rel='stylesheet' href='css/style.css'/>
+        <link rel='shortcut icon' href='images/favicon.ico' type='image/x-icon'/>
 	</head>
 	<body>
 		<header>
@@ -30,7 +31,17 @@
 			<h2>Who am I</h2>
             <p> I am Samuele Papa, known as apra on the internet. I do some stuff on <a target="_blank" href="https://github.com/apra" title="GitHub">GitHub</a> and I tweet <a target="_blank" href="https://twitter.com/oneapra" title="@oneapra">@oneapra</a>. Feel free to PM me if you have any suggestion or requests. </p>
 		</section>
+        <footer>
+		<div id="filler" style="padding:0">
+		<div class="left"><a style="padding:0" href="index.html">Home</a></div>
+		<div class="right" style="padding:4px 0 0 0">
+			<a href="https://twitter.com/share" class="twitter-share-button" data-text="I just generated a bunch of random words using text from Wikipedia with" data-via="codefeeling" data-count="none">Tweet</a>
+			<a target="_blank" href="https://github.com/apra/wikitextgenerator"><img src="images/GitHub-Mark-32px.png" id="github"></a>
+		</div>
+		</div>
+	   </footer>
 	<script>
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 	$(function(){
 		setInterval(function(){blink()},500);
 	});
