@@ -95,7 +95,7 @@ var WGen = (function (global) {
 			words = shuffle(words);
 			current = sourceText.length
 		}
-		
+		console.log(current)
 		if(current<maximum){
 			gather_page(callback)
 		}
